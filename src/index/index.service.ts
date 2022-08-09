@@ -1,11 +1,10 @@
-import { Injectable, Logger, UseFilters } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { BRASIL_USA_FOLDER_ID, CHINA_RUSSIA_FOLDER_ID } from 'config';
 import { ProcessService } from 'src/process/process.service';
 import { RepositoryService } from 'src/repository/repository.service';
 import { getData } from 'util/data';
 import { SentException } from './error/SentError.exception';
-import { SentExceptionFilter } from './filter/SentException.filter';
 
 @Injectable()
 export class IndexService {
