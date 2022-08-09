@@ -20,8 +20,8 @@ export class IndexService {
 
     return covidCsv?.isSent;
   }
-  @UseFilters(SentExceptionFilter)
-  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT, { timeZone: 'America/Bahia' })
+
+  @Cron(CronExpression.EVERY_DAY_AT_11PM, { timeZone: 'America/Bahia' })
   async excecute() {
     this.currentData = getData();
     const isSent = await this.isSent();
