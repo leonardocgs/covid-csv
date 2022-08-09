@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { CovidApiAjaxModule } from './covid-api-ajax/covid-api-ajax.module';
+
+import { ProcessModule } from './process/process.module';
 
 @Module({
-  imports: [CovidApiAjaxModule],
+  imports: [ProcessModule],
   controllers: [],
   providers: [],
 })

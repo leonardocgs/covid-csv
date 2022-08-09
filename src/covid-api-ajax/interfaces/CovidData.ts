@@ -2,7 +2,7 @@ export interface CovidData {
   country: string;
   todayCases: number;
   todayDeaths: number;
-  date: Date;
+  date: string;
   active: number;
   critical: number;
 }
