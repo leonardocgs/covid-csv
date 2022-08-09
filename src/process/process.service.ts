@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CovidApiAjaxService } from 'src/covid-api-ajax/covid-api-ajax.service';
 import { FileInformation } from 'src/covid-api-ajax/interfaces/FileInformation';
 import { CsvConverterService } from 'src/csv-converter/csv-converter.service';
+import { getDashedDate } from 'util/data';
+import { removeFile } from 'util/folder';
 
 @Injectable()
 export class ProcessService {
@@ -13,6 +15,7 @@ export class ProcessService {
     private csvConverterService: CsvConverterService,
   ) {}
   private async setContriesCovidData() {
+    this.countriesCovidData = [];
     for await (const country of this.countries) {
       const contryCovidData = await this.covidApiAjaxService.get(country);
 
@@ -20,7 +23,9 @@ export class ProcessService {
     }
   }
   private setFileInformation() {
-    const fileName = this.countries.join('-') + '.csv';
+    const date = getDashedDate();
+
+    const fileName = this.countries.join('-') + '-' + date + '.csv';
     const filePath = `csv/${fileName}`;
     this.fileInformation = { fileName, filePath };
   }
@@ -36,5 +41,6 @@ export class ProcessService {
     );
 
     await this.covidApiAjaxService.post(this.fileInformation, goFileFolderId);
+    await removeFile(this.fileInformation.filePath);
   }
 }

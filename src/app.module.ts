@@ -1,9 +1,15 @@
 import { Module } from '@nestjs/common';
-
-import { ProcessModule } from './process/process.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ScheduleModule } from '@nestjs/schedule';
+import { DB_URI } from 'config';
+import { IndexModule } from './index/index.module';
 
 @Module({
-  imports: [ProcessModule],
+  imports: [
+    MongooseModule.forRoot(DB_URI),
+    IndexModule,
+    ScheduleModule.forRoot(),
+  ],
   controllers: [],
   providers: [],
 })

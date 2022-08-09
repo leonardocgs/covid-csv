@@ -6,5 +6,6 @@ import { ProcessService } from './process.service';
 @Module({
   imports: [CovidApiAjaxModule, CsvConverterModule],
   providers: [ProcessService],
+  exports: [ProcessService],
 })
 export class ProcessModule {}
